@@ -1,0 +1,21 @@
+{
+    "name": "sikuda/php1c",
+    "type": "library",
+    "license": "MPL 2.0",
+    "autoload": {
+        "psr-4": {
+            "Sikuda\\Php1c\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sergey Kudashkin",
+            "email": "sikuda@yandex.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "ext-mbstring": "*",
+      "ext-bcmath": "*"
+    }
+}
