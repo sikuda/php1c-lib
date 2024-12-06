@@ -1,7 +1,7 @@
 {
     "name": "sikuda/php1c",
     "type": "library",
-    "license": "MPL 2.0",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Sikuda\\Php1c\\": "src/"
