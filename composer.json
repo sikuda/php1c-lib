@@ -13,7 +13,7 @@
             "email": "sikuda@yandex.ru"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
       "ext-mbstring": "*",
       "ext-bcmath": "*"
