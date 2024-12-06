@@ -17,5 +17,11 @@
     "require": {
       "ext-mbstring": "*",
       "ext-bcmath": "*"
-    }
+    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "github.com/sikuda/php1c-lib.git"
+        }
+    ]
 }
