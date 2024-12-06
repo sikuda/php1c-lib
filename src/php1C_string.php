@@ -1,4 +1,5 @@
 <?php /** @noinspection ALL */
+declare(strict_types=1);
 
 /**
 * Модуль работы со строками 1С

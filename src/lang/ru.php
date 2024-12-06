@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
 * Модуль Русского языка для получения кода PHP из 1С
 * 
@@ -143,10 +145,8 @@ const php1C_error_UndefineFunction = 'Непонятная функция';
 const php1C_error_UndefineOperator = 'Неопознанный оператор ';
 const php1C_error_UndefineSymbol   = 'Непонятный символ';
 const php1C_error_UndefineType   = 'Пока тип не определен ';
-
 const php1C_error_ConvertToNumberBad  = "Преобразование значения к типу Число не может быть выполнено";
 const php1C_error_ConvertToDateBad  = 'Преобразование значения к типу Дата не может быть выполнено';
-
 const php1C_error_DivideByZero = 'Деление на ноль';
 
 //----------------------------- Collections ----------------------------------------
@@ -165,7 +165,7 @@ const php1C_strColumnsValueTable1C = "КоллекцияКолонокТабли
 
 const php1C_strColumnValueTable1C = "КолонкаТаблицыЗначений";
 
-const php1C_strRowValueTable1C = "КолонкаТаблицыЗначений";
+const php1C_strRowValueTable1C = "СтрокаТаблицыЗначений";
 
 const php1C_strIndexesCollection1C = "ИндексыКоллекции";
 const php1C_strIndexCollection1C = "ИндексКоллекции";
