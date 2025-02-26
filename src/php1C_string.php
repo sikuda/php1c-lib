@@ -11,6 +11,8 @@ declare(strict_types=1);
 */
 namespace Sikuda\Php1c;
 use Exception;
+use Sikuda\Php1c\collections\Array1C;
+
 require_once('php1C_collections.php'); //для функций СтрРазделить, СтрСоединить
 
 /**

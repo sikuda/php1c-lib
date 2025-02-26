@@ -204,7 +204,7 @@ class CodeStream {
 				$this->code = "$".$key; 
 			}	
 			if ($this->Type === TokenStream::type_string) $this->code = '"'.$this->Look.'"';
-			if ($this->Type === TokenStream::type_date) $this->code = 'php1C\Date1C("'.$this->Look.'")';
+			if ($this->Type === TokenStream::type_date) $this->code = 'Date1C("'.$this->Look.'")';
             if($this->Type=== TokenStream::type_number) $this->code = $this->Look;
 
 			if($this->Type === TokenStream::type_keyword){
@@ -213,10 +213,10 @@ class CodeStream {
 						$this->code = '';
 						return;
 				 	case TokenStream::keyword_undefined:
-				 		$this->code = '\php1C\php1C_UndefinedType';
+				 		$this->code = 'php1C_UndefinedType';
 				 		break;
                     case TokenStream::keyword_null:
-                        $this->code = '\php1C\php1C_NullType';
+                        $this->code = 'php1C_NullType';
                         break;
 					case TokenStream::keyword_true: 
 					    $this->code = 'true'; 
@@ -350,7 +350,7 @@ class CodeStream {
 			$this->MatchOperation(TokenStream::operation_close_bracket, ')');
 		}
 		$args .= '))';
-		if($index>=0) return 'php1C\\'.$this->keywords['php'][$index].$args;
+		if($index>=0) return $this->keywords['php'][$index].$args;
 		else throw new Exception(php1C_error_UndefineType.$look);
 	}
 
@@ -372,9 +372,9 @@ class CodeStream {
 		        	$this->GetChar();
 					$this->Expression7(1);
 					if( $index === TokenStream::operation_multi ){
-						$this->code = 'php1C\mul1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'mul1C('.array_pop($this->codeStack).','.$this->code.')';
 					}else{
-						$this->code = 'php1C\div1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'div1C('.array_pop($this->codeStack).','.$this->code.')';
 					}
 				}
 				break;
@@ -385,9 +385,9 @@ class CodeStream {
 					$this->GetChar();
 					$this->Expression7(2);
 					if( $index === TokenStream::operation_plus ){
-						$this->code = 'php1C\add1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'add1C('.array_pop($this->codeStack).','.$this->code.')';
 					}else{
-						$this->code = 'php1C\sub1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'sub1C('.array_pop($this->codeStack).','.$this->code.')';
 					}	
 				}
 				break;
@@ -402,22 +402,22 @@ class CodeStream {
 					$this->Expression7(3);
 					switch ($index) {
 						case TokenStream::operation_less:
-							$this->code = 'php1C\less1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'less1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_less_equal:
-							$this->code = 'php1C\less_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'less_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_equal:
-							$this->code = 'php1C\equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_notequal:
-							$this->code = 'php1C\not_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'not_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;	
 						case TokenStream::operation_more:
-							$this->code = 'php1C\more1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'more1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_more_equal:
-							$this->code = 'php1C\more_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'more_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;		
 						default:
 						 	throw new Exception(php1C_error_OperBadLevel.$this->Look);
@@ -438,7 +438,7 @@ class CodeStream {
 					$this->codeStack[] = $this->code;
 					$this->GetChar();
 					$this->Expression7(5);
-					$this->code = 'php1C\and1C('.array_pop($this->codeStack).','.$this->code.')';
+					$this->code = 'and1C('.array_pop($this->codeStack).','.$this->code.')';
 				}
 				break;
 			case 7: //ИЛИ
@@ -446,7 +446,7 @@ class CodeStream {
 					$this->codeStack[] = $this->code;
 					$this->GetChar();
 					$this->Expression7(6);
-					$this->code = 'php1C\or1C('.array_pop($this->codeStack).','.$this->code.')';
+					$this->code = 'or1C('.array_pop($this->codeStack).','.$this->code.')';
 				}
 				break;
 			default:
@@ -497,11 +497,11 @@ class CodeStream {
 			//$this->codePHP .= 's'.$context.'->'.$func.'s';
 			switch ($func) {
 				//обработка совпадения функций
-				case 'Date(': return 'php1C\Date1C('.$args.')';
-				case 'StrLen(': return 'php1C\StrLength('.$args.')';
+				case 'Date(': return 'Date1C('.$args.')';
+				case 'StrLen(': return 'StrLength('.$args.')';
 				default:
 					if(isset($context)) return $this->functions1C['php'][$index].$args.")";
-					else return 'php1C\\'.$this->functions1C['php'][$index].$args.")";
+					else return $this->functions1C['php'][$index].$args.")";
 			}
 		} 
 		else return $func.'('.$args.")";
@@ -685,7 +685,7 @@ class CodeStream {
 						 		$this->code = $this->Expression7();
                                 $this->code = '$'.$iterator.'<='.$this->code. ';';
                                 $this->pushCode($this->code);
-						 		$this->code = '$'.$iterator.'=php1C\add1C($'.$iterator.',1)){';
+						 		$this->code = '$'.$iterator.'=add1C($'.$iterator.',1)){';
 						 		$this->MatchKeyword(TokenStream::keyword_circle);
                                 $this->pushCode($this->code);
                             }
@@ -719,7 +719,7 @@ class CodeStream {
 					 			$key = str_replace(php1C_LetterLng, php1C_LetterEng, $this->Look);
 					 			$this->GetChar();
 					 			$this->MatchOperation(TokenStream::operation_semicolon, ';');
-								$this->pushCode('$'.$key.' = php1C\php1C_UndefinedType;');
+								$this->pushCode('$'.$key.' = php1C_UndefinedType;');
 							}
 					 		else throw new Exception(php1C_error_ExpectedNameVar );
 					 		break;

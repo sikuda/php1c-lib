@@ -13,12 +13,12 @@ use const Sikuda\Php1c\php1C_strRowValueTable1C;
  * Класс строки для таблицы значений 1С
  *
  */
-class ValueTableRow{
+class ValueTableRow1С{
 
     /**
      * @var array коллекция значений в строке
      */
-    private ValueTable $ValueTable; //parent
+    private ValueTable1С $ValueTable; //parent
     private $row;        //array of fields
 
     function __construct($args=null){

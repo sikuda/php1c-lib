@@ -30,7 +30,7 @@ class Number1C
     /**
      * @throws Exception
      */
-    function __construct($val) {
+    public function __construct($val) {
         if (is_numeric($val)) { $this->value = strval($val); }
         else throw new Exception(php1C_error_ConvertToNumberBad);
     }
@@ -40,14 +40,14 @@ class Number1C
         return $this->value;
     }
 
-    function __toString(){
+    public function __toString(){
         return $this->value;
     }
 
     /**
      * @throws Exception
      */
-    function add($arg): Number1C {
+    public function add($arg): Number1C {
         $res = bcadd($this->value, strval($arg),Scale1C);
         return new Number1C($this->shrinkLastsZero($res));
     }
@@ -55,7 +55,7 @@ class Number1C
     /**
      * @throws Exception
      */
-    function sub($arg): Number1C {
+    public function sub($arg): Number1C {
         $res = bcsub($this->value, strval($arg),Scale1C);
         return new Number1C($this->shrinkLastsZero($res));
     }
@@ -63,7 +63,7 @@ class Number1C
     /**
      * @throws Exception
      */
-    function mul($arg): Number1C {
+    public function mul($arg): Number1C {
         $scale = $this->scaleLike1C($this->value);
         return new Number1C($this->shrinkLastsZero(bcmul($this->value, $arg, $scale)));
     }
@@ -71,7 +71,7 @@ class Number1C
     /**
      * @throws Exception
      */
-    function div($arg): Number1C {
+    public function div($arg): Number1C {
 
         if( bccomp($arg, "0", Scale1C) === 0) throw new Exception("Деление на 0");
         else {
@@ -80,19 +80,19 @@ class Number1C
         }
     }
 
-    function or(Number1C $arg): bool{
+    public function or(Number1C $arg): bool{
         return $this->value || $arg->getValue();
     }
-    function and(Number1C $arg): bool{
+    public function and(Number1C $arg): bool{
         return $this->value && $arg->getValue();
     }
-    function equal(Number1C $arg): bool{
+    public function equal(Number1C $arg): bool{
         return $this->cmp($arg) === 0;
     }
-    function less(Number1C $arg): bool{
+    public function less(Number1C $arg): bool{
         return $this->cmp($arg) === -1;
     }
-    function more(Number1C $arg): bool{
+    public function more(Number1C $arg): bool{
         return $this->cmp($arg) === 1;
     }
 

@@ -6,7 +6,7 @@ namespace Sikuda\Php1c\collections;
 /**
  * Индекс коллекции(пока пустая реализация для ТаблицыЗначений)
  */
-class CollectionIndex{
+class CollectionIndex1С{
     protected string $name;
     function __construct(string $col){
         $this->name = $col;

@@ -16,14 +16,14 @@ use Sikuda\Php1c\collections\Array1C;
 use Sikuda\Php1c\collections\FixedArray1C;
 use Sikuda\Php1c\collections\Map1C;
 use Sikuda\Php1c\collections\Structure1C;
-use Sikuda\Php1c\collections\ValueTable;
+use Sikuda\Php1c\collections\ValueTable1С;
 
-require_once('TokenStream.php');
+//require_once('TokenStream.php');
 
 /**
 * Массив названий типов для работы с коллекциями переименовании
 */
-const php1C_typesPHP_Collection = array('Array1C','Structure1C','Map1C','ValueTable', 'FixedArray1C');
+const php1C_typesPHP_Collection = array('Array1C','Structure1C','Map1C','ValueTable1C', 'FixedArray1C');
 
 /**
 * Массив названий английских функций для работы с датой. Соответствует элементам русским функций.
@@ -36,7 +36,7 @@ const php1C_functionsPHP_Collections = array('UBound(',   'Insert(',   'Add(',  
  *
  * @param string $key строка в названии функции со скобкой
  * @param array $arguments аргументы функции в массиве
- * @return Structure1C|Map1C|Array1C|ValueTable|FixedArray1C результат функции или выбрасывает исключение
+ * @return Structure1C|Map1C|Array1C|ValueTable1С|FixedArray1C результат функции или выбрасывает исключение
  * @throws Exception
  */
 function callCollectionType(string $key, array $arguments)
@@ -46,7 +46,7 @@ function callCollectionType(string $key, array $arguments)
         case 'FixedArray1C': return FixedArray1C($arguments);
         case 'Structure1C': return Structure1C($arguments);
         case 'Map1C': return Map1C($arguments);
-        case 'ValueTable': return ValueTable($arguments);
+        case 'ValueTable1C': return ValueTable1C($arguments);
         default: throw new Exception('Пока тип в коллекциях не определен ' . $key);
     }
 }
@@ -83,7 +83,7 @@ function Structure1C(array $args=null): Structure1C
 /**
  * Получение соответствия 1С
  *
- * @param null $args
+ * @param $args
  * @return Map1C - возвращает новый объект массива 1С
  *
  */
@@ -97,13 +97,13 @@ function Map1C($args=null): Map1C
 /**
  * Получение ТаблицыЗначений
  *
- * @param null $args аргументы функции в массиве
- * @return ValueTable - возвращает новый объект ТаблицаЗначений1С
+ * @param $args аргументы функции в массиве
+ * @return ValueTable1С - возвращает новый объект ТаблицаЗначений1С
  *
  */
-function ValueTable($args=null): ValueTable
+function ValueTable($args=null): ValueTable1С
 {
-	return new ValueTable($args);
+	return new ValueTable1С($args);
 }
 
 

@@ -12,7 +12,7 @@ use const Sikuda\Php1c\php1C_strIndexesCollection1C;
 /**
  * Коллекция индексов(пока пустая реализация для ТаблицыЗначений)
  */
-class CollectionIndexes{
+class CollectionIndexes1С{
     /**
      * @var array коллекция значений в строке
      */
@@ -43,7 +43,7 @@ class CollectionIndexes{
         if(is_string($key)){
             if( fEnglishVariable ) $key = str_replace(php1C_LetterLng, php1C_LetterEng, $key);
             $key = strtoupper($key);
-            $this->Indexes[$key] = new CollectionIndex($key);
+            $this->Indexes[$key] = new CollectionIndex1С($key);
         }
         else  throw new Exception("Имя колонки должно быть строкой");
     }

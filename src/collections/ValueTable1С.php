@@ -12,13 +12,13 @@ use const Sikuda\Php1c\php1C_LetterLng;
  * Класс для работы с таблицей значений 1С8
  *
  */
-class ValueTable {
+class ValueTable1С {
 
     private array $rows;   //array of ValueTableRow
-    public ValueTableColumnCollection $COLUMNS; //ValueTableColumnCollection - collection of ValueTableColumn
+    public ValueTableColumnCollection1С $COLUMNS; //ValueTableColumnCollection - collection of ValueTableColumn
     //public $КОЛОНКИ;
     public $KOLONKI;
-    public CollectionIndexes $INDEXES; //CollectionIndexes коллекция из CollectionIndex
+    public CollectionIndexes1С $INDEXES; //CollectionIndexes коллекция из CollectionIndex
     //public $ИНДЕКСЫ;
     public $INDEKSYY;
 
@@ -27,10 +27,10 @@ class ValueTable {
         if(is_array($copy)) $this->rows = $copy;
         else{
             $this->rows = array();
-            $this->COLUMNS = new ValueTableColumnCollection($this);
+            $this->COLUMNS = new ValueTableColumnCollection1С($this);
             //$this->КОЛОНКИ = &$this->COLUMNS;
             $this->KOLONKI = &$this->COLUMNS;
-            $this->INDEXES = new CollectionIndexes($this);
+            $this->INDEXES = new CollectionIndexes1С($this);
             //$this->ИНДЕКСЫ = &$this->INDEXES;
             $this->INDEKSYY = &$this->INDEXES;
         }
@@ -59,8 +59,8 @@ class ValueTable {
     }
 
     //Добавить новую строку в таблицу
-    function Add(): ValueTableRow {
-        $row = new ValueTableRow($this);
+    function Add(): ValueTableRow1С {
+        $row = new ValueTableRow1С($this);
         $this->rows[] = $row;
         return $row;
     }
@@ -69,10 +69,10 @@ class ValueTable {
      * Вставить новую строку в таблицу
      * @throws Exception
      */
-    function Insert($index): ValueTableRow
+    function Insert($index): ValueTableRow1С
     {
         if(is_int($index)){
-            $row = new ValueTableRow($this);
+            $row = new ValueTableRow1С($this);
             $this->rows[$index] = $row;
             return $row;
         }
@@ -93,7 +93,7 @@ class ValueTable {
             $col = $this->COLUMNS->cols[strtoupper($col)];
         }
         else throw new Exception("Не задана колонка для выгрузки ".$col);
-        if(is_object($col) && get_class($col) === 'php1C\ValueTableColumn'){
+        if(is_object($col) && get_class($col) === 'ValueTableColumn'){
             foreach ($this->rows as $key => $value) {
                 $val = $value->Get($col->NAME);
                 $array->Add($val);
@@ -116,7 +116,7 @@ class ValueTable {
 
                 $col = $this->COLUMNS->cols[strtoupper($col)];
             }
-            if($col instanceof ValueTableColumn){
+            if($col instanceof ValueTableColumn1С){
                 $k = 0;
                 foreach ($this->rows as $key => $value) {
                     $value->Set($col->NAME, $arr[$k]);
@@ -250,11 +250,11 @@ class ValueTable {
      * Для установки данных через точку
      * @throws Exception
      */
-    function Set($key, \php1C\ValueTableColumnCollection $val){
+    function Set($key, ValueTableColumnCollection1С $val){
         if(is_string($key)){
             if( fEnglishVariable ) $key = str_replace(php1C_LetterLng, php1C_LetterEng, $key);
             $key = strtoupper($key);
-            if(($key === 'КОЛОНКИ' || $key === 'COLUMNS') && (get_class($val) === 'php1C\ValueTableColumnCollection')){
+            if(($key === 'КОЛОНКИ' || $key === 'COLUMNS') && (get_class($val) === 'ValueTableColumnCollection')){
                 $this->COLUMNS = $val;
                 $this->COLUMNS->setValueTable($this);
             }
@@ -320,7 +320,7 @@ class ValueTable {
 
     //Сдвинуть строку $row на $offset
     function Move($row, $offset){
-        if(is_object($row) && get_class($row) === 'php1C\ValueTableRow'){
+        if(is_object($row) && get_class($row) === 'ValueTableRow'){
             $row = $this->IndexOf($row);
         }
         $row_int = intval($row);
@@ -335,12 +335,12 @@ class ValueTable {
      *
      * @param null $rows массив строк для выгрузки
      * @param string|null $strcols
-     * @return ValueTable - возвращает новый объект ТаблицаЗначений1С
+     * @return ValueTable1С - возвращает новый объект ТаблицаЗначений1С
      * @throws Exception
      */
-    function Copy($rows=null, string $strcols=null): ValueTable
+    function Copy($rows=null, string $strcols=null): ValueTable1С
     {
-        if(isset($row) && (!is_object($rows) || get_class($rows) !== 'php1C\Array1C')) throw new Exception("Первый параметр должен быть массивом строк или пустым");
+        if(isset($row) && (!is_object($rows) || get_class($rows) !== 'Array1C')) throw new Exception("Первый параметр должен быть массивом строк или пустым");
         if(!isset($strcols)) $strcols = $this->GetAllColumns();
         if( fEnglishVariable ) $strcols = str_replace(php1C_LetterLng, php1C_LetterEng, $strcols);
         $array = $this->CopyColumns($strcols);
@@ -360,14 +360,14 @@ class ValueTable {
      * Скопировать пустые колонки ТаблицуЗначений в новую ТаблицуЗначений
      *
      * @param string $strCols строка перечисления колонок
-     * @return ValueTable - возвращает новый объект ТаблицаЗначений1С
+     * @return ValueTable1С - возвращает новый объект ТаблицаЗначений1С
      * @throws Exception
      */
-    function CopyColumns(string $strCols): ValueTable
+    function CopyColumns(string $strCols): ValueTable1С
     {
         if(!isset($strCols)) $strCols = $this->GetAllColumns();
         if( fEnglishVariable ) $strCols = str_replace(php1C_LetterLng, php1C_LetterEng, $strCols);
-        $array = new ValueTable;
+        $array = new ValueTable1С;
         $keys = explode(',',$strCols);
         for ($i=0; $i < count($keys); $i++){
             $col = strtoupper(trim($keys[$i]));
@@ -422,7 +422,7 @@ class ValueTable {
     function Del($row){
         if(is_int($row)){
             $row = $this->rows[$row];
-        }elseif(!is_object($row) && get_class($row) !== 'php1C\ValueTableRow'){
+        }elseif(!is_object($row) && get_class($row) !== 'ValueTableRow'){
             throw new Exception("Параметр может быть либо строкой либо числом");
         }
         $key = $this->IndexOf($row);

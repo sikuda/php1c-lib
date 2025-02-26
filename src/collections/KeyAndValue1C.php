@@ -30,6 +30,5 @@ class KeyAndValue1C{
             case "VALUE": return $this->value;
         }
         throw new Exception("Не найден ключ или значение".$key);
-
     }
 }

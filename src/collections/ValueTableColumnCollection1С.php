@@ -12,7 +12,7 @@ use const Sikuda\Php1c\php1C_strColumnsValueTable1C;
  * Класс коллекции колонок таблицы значений 1С
  *
  */
-class ValueTableColumnCollection{
+class ValueTableColumnCollection1С{
 
     /**
      * @var array коллекция ValueTableColumn

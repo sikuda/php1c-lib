@@ -356,11 +356,11 @@ function ValueIsFilled($val): bool
 {
 	if(is_object($val)){
 		switch (get_class($val)) {
-            case 'php1C\Number1C': return !$val->equal(Number1C(0));
-		 	case 'php1C\Date1C': return $val != "01.01.0001 00:00:00";
-		 	case 'php1C\Array1C':
-		 	case 'php1C\ValueTable':
-		 	case 'php1C\ValueTableColumnCollection': return ($val->Count()>0);	
+            case 'Number1C': return !$val->equal(Number1C(0));
+		 	case 'Date1C': return $val != "01.01.0001 00:00:00";
+		 	case 'Array1C':
+		 	case 'ValueTable':
+		 	case 'ValueTableColumnCollection': return ($val->Count()>0);	
 		 	default:
 		 		break;
 		 } 

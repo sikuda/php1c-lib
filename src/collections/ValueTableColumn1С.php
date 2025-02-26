@@ -9,7 +9,7 @@ use const Sikuda\Php1c\php1C_strColumnValueTable1C;
  * Класс колонки таблицы значений 1С
  *
  */
-class ValueTableColumn{
+class ValueTableColumn1С{
 
     /**
      * @var array коллекция значений в колонке
