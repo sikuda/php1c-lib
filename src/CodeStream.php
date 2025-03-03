@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Sikuda\Php1c;
 use Exception;
 
+require_once "TokenStream.php";
+require_once 'Common1C.php';
+
 /**
 * Класс обработки потока кода 1С
 *
@@ -20,7 +23,7 @@ use Exception;
 class CodeStream {
 
     //array of token
-    public array $tokens  = array();
+    public array $tokens  = [];
     private int $i_token = 0;
 
     //current token
@@ -213,10 +216,10 @@ class CodeStream {
 						$this->code = '';
 						return;
 				 	case TokenStream::keyword_undefined:
-				 		$this->code = 'php1C_UndefinedType';
+				 		$this->code = 'Sikuda\php1C\php1C_UndefinedType';
 				 		break;
                     case TokenStream::keyword_null:
-                        $this->code = 'php1C_NullType';
+                        $this->code = 'Sikuda\php1C\php1C_NullType';
                         break;
 					case TokenStream::keyword_true: 
 					    $this->code = 'true'; 
@@ -372,9 +375,9 @@ class CodeStream {
 		        	$this->GetChar();
 					$this->Expression7(1);
 					if( $index === TokenStream::operation_multi ){
-						$this->code = 'mul1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'Sikuda\php1C\mul1C('.array_pop($this->codeStack).','.$this->code.')';
 					}else{
-						$this->code = 'div1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'Sikuda\php1C\div1C('.array_pop($this->codeStack).','.$this->code.')';
 					}
 				}
 				break;
@@ -385,9 +388,9 @@ class CodeStream {
 					$this->GetChar();
 					$this->Expression7(2);
 					if( $index === TokenStream::operation_plus ){
-						$this->code = 'add1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'Sikuda\php1C\add1C('.array_pop($this->codeStack).','.$this->code.')';
 					}else{
-						$this->code = 'sub1C('.array_pop($this->codeStack).','.$this->code.')';
+						$this->code = 'Sikuda\php1C\sub1C('.array_pop($this->codeStack).','.$this->code.')';
 					}	
 				}
 				break;
@@ -402,22 +405,22 @@ class CodeStream {
 					$this->Expression7(3);
 					switch ($index) {
 						case TokenStream::operation_less:
-							$this->code = 'less1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\less1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_less_equal:
-							$this->code = 'less_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\less_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_equal:
-							$this->code = 'equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_notequal:
-							$this->code = 'not_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\not_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;	
 						case TokenStream::operation_more:
-							$this->code = 'more1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\more1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;
 						case TokenStream::operation_more_equal:
-							$this->code = 'more_equal1C('.array_pop($this->codeStack).','.$this->code.')';
+							$this->code = 'Sikuda\php1C\more_equal1C('.array_pop($this->codeStack).','.$this->code.')';
 							break;		
 						default:
 						 	throw new Exception(php1C_error_OperBadLevel.$this->Look);
@@ -438,7 +441,7 @@ class CodeStream {
 					$this->codeStack[] = $this->code;
 					$this->GetChar();
 					$this->Expression7(5);
-					$this->code = 'and1C('.array_pop($this->codeStack).','.$this->code.')';
+					$this->code = 'Sikuda\php1C\and1C('.array_pop($this->codeStack).','.$this->code.')';
 				}
 				break;
 			case 7: //ИЛИ
@@ -446,7 +449,7 @@ class CodeStream {
 					$this->codeStack[] = $this->code;
 					$this->GetChar();
 					$this->Expression7(6);
-					$this->code = 'or1C('.array_pop($this->codeStack).','.$this->code.')';
+					$this->code = 'Sikuda\php1C\or1C('.array_pop($this->codeStack).','.$this->code.')';
 				}
 				break;
 			default:
@@ -685,7 +688,7 @@ class CodeStream {
 						 		$this->code = $this->Expression7();
                                 $this->code = '$'.$iterator.'<='.$this->code. ';';
                                 $this->pushCode($this->code);
-						 		$this->code = '$'.$iterator.'=add1C($'.$iterator.',1)){';
+						 		$this->code = '$'.$iterator.'=Sikuda\php1C\add1C($'.$iterator.',1)){';
 						 		$this->MatchKeyword(TokenStream::keyword_circle);
                                 $this->pushCode($this->code);
                             }
@@ -719,7 +722,7 @@ class CodeStream {
 					 			$key = str_replace(php1C_LetterLng, php1C_LetterEng, $this->Look);
 					 			$this->GetChar();
 					 			$this->MatchOperation(TokenStream::operation_semicolon, ';');
-								$this->pushCode('$'.$key.' = php1C_UndefinedType;');
+								$this->pushCode('$'.$key.' = Sikuda\php1C\php1C_UndefinedType;');
 							}
 					 		else throw new Exception(php1C_error_ExpectedNameVar );
 					 		break;

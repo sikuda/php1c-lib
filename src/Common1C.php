@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Sikuda\Php1c;
 use Exception;
 
-require_once('php1C_settings.php');
+require_once('Settings1C.php');
 if (Language1C === 'en') {
  	require_once('lang/en.php');
 }
@@ -20,19 +20,15 @@ else{
 }
 
 require_once('Number1C.php');
-require_once('php1C_string.php');
+require_once('String1C.php');
 require_once('Date1C.php');
-require_once('php1C_collections.php');
+require_once('Collections1C.php');
 require_once('File1C.php');
 
 /**
 * Массив функций PHP для общей работы с 1С. Соответствует элементам в языковых файлах.
 */   
 const php1C_functionsPHP_Com = array('Message(','Find(','ValueIsFilled(','Type(','TypeOf(','toString1C(','toNumber1C(');
-
-//id уникальные от oscript
-const php1C_UndefinedType = 'Undefined-783CE532-8CE0-4C59-BEF4-835AEFB715E4';
-const php1C_NullType = 'Null-26D78088-915A-4294-97E1-FB39E70187A6';
 
 /**
 * Выводит данные в представлении 1С (на установленном языке)

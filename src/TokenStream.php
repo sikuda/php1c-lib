@@ -8,7 +8,7 @@
 
 namespace Sikuda\Php1c;
 use Exception;
-require_once('php1C_common.php');
+require_once 'Common1C.php';
 
 /**
 * Класс токена - элемент кода

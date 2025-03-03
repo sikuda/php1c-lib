@@ -13,7 +13,7 @@ namespace Sikuda\Php1c;
 use Exception;
 use Sikuda\Php1c\collections\Array1C;
 
-require_once('php1C_collections.php'); //для функций СтрРазделить, СтрСоединить
+//require_once('php1C_collections.php'); //для функций СтрРазделить, СтрСоединить
 
 /**
 * Массив названий английских функций для работы со строками. Соответствует элементам русским функций.
